@@ -1,0 +1,21 @@
+.snackbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  left: 0.75rem;
+  right: 0.75rem;
+  border-radius: 10px;
+  background: #ffcb36;
+  margin-top: 0.25rem;
+}
+
+.snackbar-link-copied {
+  background: #374051;
+}
+
+.snackbar-text {
+  color: #000000;
+}
+.snackbar-action {
+  width: 30%;
+}

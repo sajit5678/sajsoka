@@ -1,0 +1,42 @@
+{
+  "name": "tambola",
+  "version": "0.0.1",
+  "description": "Tambola Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd frontend && npm i && npm run build && cd ../landing && npm i && npm run css-build",
+    "start": "node app.js",
+    "dev-start": "cd frontend && npm i && npm run build && cd ../ && nodemon app.js",
+    "watch": "npm-watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kashish-jain/tambola.git"
+  },
+  "author": "Kashish, Chirag",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kashish-jain/tambola/issues"
+  },
+  "homepage": "https://github.com/kashish-jain/tambola#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.17.3",
+    "express-session": "^1.18.1",
+    "http": "0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.4",
+    "socket.io": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/socket.io-client": "^1.4.32",
+    "nodemon": "^2.0.3",
+    "npm-watch": "^0.13.0",
+    "prettier": "^2.0.5"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

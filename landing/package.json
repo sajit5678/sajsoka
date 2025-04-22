@@ -1,0 +1,20 @@
+{
+  "name": "landing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "css-build": "sass sass/mystyles.scss css/mystyles.css --style compressed",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.8.2"
+  },
+  "devDependencies": {
+    "bulma": "^0.8.2",
+    "sass": "^1.81.0"
+  }
+}

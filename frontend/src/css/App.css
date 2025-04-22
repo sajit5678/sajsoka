@@ -1,0 +1,425 @@
+@import "~animate.css/animate.compat.css";
+@import "./GoneNumbers.css";
+@import "./WaitingAndTimer.css";
+@import "./EnterName.css";
+@import "./layout.css";
+
+body {
+  background-color: #0e141f;
+  color: #ffffff;
+  /* this is to prevent animation to add a horizontal scrollbar */
+  overflow-x: hidden;
+}
+
+.board-component-main {
+  text-align: center;
+}
+
+.box {
+  position: relative;
+  display: inline-block;
+  background-color: #374051;
+  width: 50px;
+  height: 50px;
+  border: #ffcb36 solid 1px;
+  cursor: pointer;
+}
+
+.box p {
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.box > div {
+  display: inline-block;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  height: 0;
+}
+.box > div:first-child {
+  transform: rotate(45deg);
+}
+.box > div:nth-child(2) {
+  transform: rotate(135deg);
+}
+
+.board-box {
+  display: inline-block;
+  background-color: #374051;
+  width: 50px;
+  height: 50px;
+  border: #000000 solid 2px;
+  margin: 0;
+}
+
+button {
+  width: 10rem;
+  height: 3rem;
+  font-size: large;
+  color: #ffffff;
+  background: #374051;
+  border: 2px solid #ffcb36;
+  box-sizing: border-box;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+p.new-number-host,
+p.only-new-number-player {
+  font-weight: bolder;
+  color: #ffcb36;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+p.new-number-host {
+  font-size: 4rem;
+}
+
+p.only-new-number-player {
+  font-size: 3rem;
+}
+
+.checked {
+  border: 2px solid #ffcb36;
+  z-index: 2;
+  transition: 0.2s;
+}
+
+.checkmark {
+  color: #ffcb36;
+}
+
+.config-table {
+  width: 100%;
+  border-spacing: 0.75rem;
+}
+
+.config-table tr {
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.config-table td.award-name {
+  width: 45%;
+}
+
+.config-table td.award-number {
+  width: 35%;
+}
+
+.config-table td.cross-button {
+  width: 20%;
+}
+
+.config-table td.cross-button button,
+.close-toast {
+  background-color: #0e141f;
+  color: #ffcb36;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 3rem;
+}
+
+.config-table thead th {
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  color: white;
+  padding: 0;
+  height: 3rem;
+}
+
+form > table > thead > tr > th.award-name-heading,
+form > table > thead > tr > th.award-number-heading {
+  background-color: #374051;
+}
+
+/* This is for ready-player component's table's heading */
+#root > div > div > div > table > tr:nth-child(1) > th {
+  background-color: #374051;
+  height: 3rem;
+}
+
+.config-table input {
+  background-color: #0e141f;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: #374051 1px solid;
+  color: #a89e8a;
+  text-align: center;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+/* This is for PC configuration table */
+.config-table > tbody > tr > td {
+  font-size: 1.2rem;
+  color: #a89e8a;
+}
+
+.disabled-button {
+  opacity: 0.5;
+  cursor: default;
+}
+
+#game-over-reward {
+  position: absolute;
+  left: 50%;
+}
+
+div.host-ticket {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+div.line,
+div.board-line {
+  display: flex;
+  justify-content: center;
+}
+
+div.new-number-host-container,
+div.new-number-player-container {
+  display: inline-block;
+  border: 1px solid #ffcb36;
+  border-radius: 10px;
+  margin: 1rem;
+  position: relative;
+}
+
+div.new-number-host-container {
+  width: 6rem;
+  height: 6rem;
+}
+
+div.new-number-player-container {
+  width: 5rem;
+  height: 5rem;
+}
+
+div.notification-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  color: #ffcb36;
+}
+
+div.notification {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+div.notification-parent {
+  position: relative;
+}
+
+div.notification .main {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  opacity: 1;
+}
+
+div.notification .sub {
+  font-size: 2rem;
+  margin: 0;
+  opacity: 1;
+}
+
+div.pc-ticket {
+  text-align: center;
+}
+
+/* This is just for pc config to align it with "pc configuration" heading */
+form > table#pc-config-table > tbody > tr > td:nth-child(1) {
+  text-align: left;
+}
+
+form > table > tbody > tr:nth-child(1) > td.number-tickets {
+  border-bottom: #374051 1px solid;
+}
+
+form > div.buttons-container {
+  box-sizing: border-box;
+  display: flex;
+}
+
+form > div.buttons-container button.start-game,
+form > div.buttons-container button.add-row {
+  margin-left: 0.75rem;
+}
+
+form > div.buttons-container button.start-game {
+  margin-right: 0.75rem;
+}
+
+form > div.buttons-container button.start-game,
+form > table > tbody > tr:nth-child(2) > td:nth-child(2) > button.ready {
+  background-color: #ffcb36;
+  color: #0e141f;
+  border: 1px solid #a89e8a;
+}
+
+h1.host-configuration,
+h1.pc-configuration,
+h1.players-in-game,
+p.award-status {
+  margin-left: 0.75rem;
+}
+
+.host-ticket > p.win-call-type {
+  font-size: 2rem;
+  color: #ffcb36;
+  margin: 0;
+}
+
+.host-ticket > p.player-name {
+  color: #a89e8a;
+  margin-top: 0;
+}
+
+.game-ended {
+  opacity: 0.2;
+}
+
+hr {
+  border: 1px solid #374051;
+}
+
+label {
+  font-size: 2rem;
+}
+
+.modal-content {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #0e141f;
+}
+
+.modal-overlay {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.new-number-player {
+  font-size: 3rem;
+  margin: 1rem 0 0 0;
+}
+.no-click {
+  pointer-events: none;
+}
+
+p.game-over {
+  font-size: 3rem;
+  font-weight: bolder;
+  color: #ffcb36;
+  text-align: center;
+  position: relative;
+  top: -50%;
+  transform: translateY(50%);
+}
+
+.custom-pulse {
+  animation: customPulse 3s 2;
+}
+.ready-players {
+  width: 100%;
+  border-spacing: 0.75rem;
+  table-layout: fixed;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* Ready Players 1st and second column color */
+#root > div > div > div > table.ready-players > tr > td:nth-child(1),
+#root > div > div > div > table.ready-players > tr > td:nth-child(2) {
+  color: #a89e8a;
+}
+
+/* this will be the color of X (when player not ready)
+  otherwise it will be a checkmark which has its color from its class
+*/
+#root > div > div > div > table.ready-players > tr > td:nth-child(3) {
+  color: #ff7c35;
+}
+
+table#pc-config-table {
+  border-spacing: 1rem;
+}
+
+.toast-background {
+  background-color: #374051;
+}
+
+.toast-body {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.unchecked {
+  width: 0;
+  border: none;
+  transition: 0.2s;
+}
+
+.winning-buttons,
+.result-buttons,
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.winning-buttons > button {
+  margin-top: 0.5rem;
+}
+
+@-webkit-keyframes customPulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 #ffcb36;
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 20px rgba(120, 120, 120, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(120, 120, 120, 0);
+  }
+}
+@keyframes customPulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(120, 120, 120, 0.4);
+    box-shadow: 0 0 0 0 rgba(120, 120, 120, 0.4);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 20px rgba(120, 120, 120, 0);
+    box-shadow: 0 0 0 20px rgba(120, 120, 120, 0);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(120, 120, 120, 0);
+    box-shadow: 0 0 0 0 rgba(120, 120, 120, 0);
+  }
+}

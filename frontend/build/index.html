@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Join this game room by clicking on this link." />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta property="og:title" content="Tambola Online" />
+    <meta property="og:description" content="Join this game room by clicking on this link." />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168093483-1"></script>
+	<script defer="defer" src="/static/js/main.747468f1.js"></script><link href="/static/css/main.5b4400e7.css" rel="stylesheet">
+	
+    <script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "UA-168093483-1");
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold">User Dashboard</h1>
+
+        <div class="relative">
+            <button id="menu-button" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
+                Menu
+            </button>
+            <div id="menu" class="hidden absolute right-0 bg-black text-white shadow-lg rounded mt-2 w-48">
+                <button class="block w-full text-left px-4 py-2 hover:bg-gray-700" id="user-info">User Information</button>
+                <button class="block w-full text-left px-4 py-2 hover:bg-gray-700" id="settings">Settings</button>
+                <button class="block w-full text-left px-4 py-2 hover:bg-gray-700" id="previous-draw">Previous Draw</button>
+                <button class="block w-full text-left px-4 py-2 hover:bg-gray-700" id="upcoming-draw">Upcoming Draw</button>
+                <form id="logout-form" action="/auth/logout" method="POST">
+                    <button type="submit" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-700">Logout</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+        <section id="user-info-section" class="hidden mt-4">
+            <h2 class="text-lg font-semibold mb-2">User Information</h2>
+            <p><strong>Email:</strong> <span id="user-email" class="text-gray-700"></span></p>
+            <p><strong>Status:</strong> Logged In</p>
+        </section>
+
+        <section id="settings-section" class="hidden mt-4">
+            <h2 class="text-lg font-semibold mb-2">Settings</h2>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Edit Profile</button>
+        </section>
+
+        <section id="previous-draw-section" class="hidden mt-4">
+            <h2 class="text-lg font-semibold mb-2">Previous Draw</h2>
+            <div class="bg-gray-200 p-4 rounded">
+                <p class="text-gray-700">No previous draws available.</p>
+            </div>
+        </section>
+
+        <section id="upcoming-draw-section" class="hidden mt-4">
+            <h2 class="text-lg font-semibold mb-2">Upcoming Draw</h2>
+            <div class="bg-gray-200 p-4 rounded">
+                <p class="text-gray-700">Next draw is scheduled at 6:00 PM.</p>
+            </div>
+        </section>
+
+        <section id="new-game-section" class="mt-4">
+            <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center gap-2 hidden" id="generate-new-room">
+                <i class="fas fa-gamepad"></i>
+                New Game
+            </button>
+        </section>
+    </main>
+	
+
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const menu = document.getElementById('menu');
+        const sections = {
+            'user-info': 'user-info-section',
+            'settings': 'settings-section',
+            'previous-draw': 'previous-draw-section',
+            'upcoming-draw': 'upcoming-draw-section'
+        };
+
+        menuButton.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        Object.keys(sections).forEach(id => {
+            document.getElementById(id).addEventListener('click', () => {
+                Object.values(sections).forEach(section => {
+                    document.getElementById(section).classList.add('hidden');
+                });
+                document.getElementById(sections[id]).classList.remove('hidden');
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Fetch user data dynamically
+        fetch('/auth/user-info')
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById('user-email').textContent = data.email;
+				console.log('Fetching user data:', data);
+
+                // Show New Game button only for admin users
+                if (data.isAdmin) {
+					alert("Admin user");
+                    document.getElementById('generate-new-room').classList.remove('hidden');
+                }
+            })
+            .catch((error) => {
+                alert("Error fetching data");
+				console.error('Error fetching user data:', error);
+            });
+
+        // Handle logout to remove token
+        document.getElementById('logout-form').addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Remove token from localStorage
+            localStorage.removeItem('token');
+
+            // Submit the form programmatically after clearing the token
+            fetch('/auth/logout', {
+                method: 'POST',
+            })
+            .then(() => {
+                // Redirect to login or home page after logout
+                window.location.href = '/';
+            })
+            .catch((error) => {
+                console.error('Error during logout:', error);
+            });
+        });
+
+        function uniqueid() {
+			var idstr = String.fromCharCode(Math.floor(Math.random() * 25 + 65));
+			do {
+				var ascicode = Math.floor(Math.random() * 42 + 48);
+				if (ascicode < 58 || ascicode > 64) {
+					idstr += String.fromCharCode(ascicode);
+				}
+			} while (idstr.length < 32);
+
+			return idstr;
+		}
+
+		window.onload = function () {
+			var newRoomBtn = document.getElementById("generate-new-room");
+			newRoomBtn.onclick = () => {
+				let uniqueRoomId = uniqueid();
+
+				// Make a request to your server to store the chat room ID in the database
+				fetch('/auth/save-chat-room', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ chatRoomId: uniqueRoomId })
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						// Redirect to the new game room URL after storing the ID in the database
+						location.href = '/game/' + uniqueRoomId;
+					} else {
+						alert('Error creating new game room');
+					}
+				})
+				.catch((error) => {
+					console.error('Error storing chat room ID:', error);
+					alert('Error creating new game room');
+				});
+			};
+		};
+    </script>
+</body>
+</html>

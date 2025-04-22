@@ -1,0 +1,119 @@
+.enter-details-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1e2733; /* Dark background */
+}
+
+.enter-details {
+  width: 90%;
+  max-width: 400px;
+  background: #0e141f;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #ffffff;
+}
+
+.enter-details-question {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #ffcb36;
+}
+
+input#enter-name,
+input#enter-phone {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  border: 1px solid #374051;
+  border-radius: 5px;
+  background: #1e2733;
+  color: #ffcb36;
+  box-sizing: border-box;
+}
+
+input#enter-name:focus,
+input#enter-phone:focus {
+  outline: none;
+  border-color: #ffcb36;
+  box-shadow: 0 0 5px rgba(255, 203, 54, 0.5);
+}
+
+button {
+  background: #ffcb36;
+  border: none;
+  color: #0e141f;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: #ffd75e;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.config-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1e2733; /* Matching the background color */
+}
+
+.config-content {
+  width: 90%;
+  max-width: 400px;
+  background: #0e141f;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #ffffff;
+}
+
+.config-header {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #ffcb36;
+}
+
+.config-details {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ffcb36;
+}
+
+button.config-button {
+  background: #ffcb36;
+  border: none;
+  color: #0e141f;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button.config-button:hover {
+  background: #ffd75e;
+}
+
+button.config-button:active {
+  transform: scale(0.95);
+}
